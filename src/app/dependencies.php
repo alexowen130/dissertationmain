@@ -16,7 +16,7 @@ $app = new \Slim\App([
 $container = $app->getContainer();
 
 $container['view'] = function ($container) {
-	$view = new \Slim\Views\Twig(__DIR__ . '/../views', [
+	$view = new \Slim\Views\Twig(__DIR__ . '/../templates', [
 		'cache' => false,
 		]);
 
@@ -33,7 +33,7 @@ $container['view'] = function ($container) {
 
 
 $container['HomeController'] = function($container) {
-	return new App\controllers\HomeController;
+	return new \App\controllers\HomeController($container);
 };
 
 
