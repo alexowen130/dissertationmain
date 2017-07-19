@@ -1,5 +1,7 @@
 <?php
 
+use Respect\Validation\Validator as v;
+
 session_start();
 
 require __DIR__ . '/../../vendor/autoload.php';
@@ -46,16 +48,37 @@ $container['view'] = function ($container) {
 		return $view;
 };
 
+///////Start of Controllers
 
-$container['HomeController'] = function($container) {
-	return new \App\controllers\HomeController($container);
-};
 
 $container['PermissionController'] = function($container) {
 	return new \App\controllers\auth\PermissionController($container);
 };
 
+$container['validator'] = function ($container){
+
+	return new \App\validation\validator;
+
+};
+
+$container['HomeController'] = function($container) {
+	return new \App\controllers\HomeController($container);
+};
+
+///////End of Controlllers
 
 
+//////Start of Middleware /////////
+
+$app->add(new \App\middleware\validationMiddleware($container));
+
+$app->add(new \App\middleware\persistantDataMiddleware($container));
+
+
+////Custom validation rules/////
+v::with('app\\validation\\rules\\');
+
+////End of Custom validation rules /////
+//////End of Middleware ///////////
 
 require __DIR__ . '/../routes/routes.php';
