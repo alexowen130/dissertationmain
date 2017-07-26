@@ -37,6 +37,11 @@ $container['db'] = function ($container) use ($capsule) {
 	return $capsule;
 };
 
+$container['auth'] = function($container) {
+	return new \App\authentication\Auth($container);
+};
+
+
 $container['view'] = function ($container) {
 	$view = new \Slim\Views\Twig(__DIR__ . '/../templates', [
 		'cache' => false,
@@ -45,6 +50,13 @@ $container['view'] = function ($container) {
 		$container->router,
 		$container->request->getUri()
 		));
+
+	$view->getEnvironment()->addGlobal('auth', [
+		'check' => $container->auth->signedIn(),
+		'user' => $container->auth->user(),
+
+		]);
+
 		return $view;
 };
 
@@ -64,9 +76,12 @@ $container['validator'] = function ($container){
 $container['HomeController'] = function($container) {
 	return new \App\controllers\HomeController($container);
 };
+///////End of Controlllers /////////
 
-///////End of Controlllers
+////// Authentication ////////////
 
+
+///////Authentication /////////
 
 //////Start of Middleware /////////
 
@@ -76,9 +91,15 @@ $app->add(new \App\middleware\persistantDataMiddleware($container));
 
 
 ////Custom validation rules/////
-v::with('app\\validation\\rules\\');
+
+
+//Not in use currently
+
+// v::with('App\\validation\\custom\\');
+
 
 ////End of Custom validation rules /////
 //////End of Middleware ///////////
+
 
 require __DIR__ . '/../routes/routes.php';

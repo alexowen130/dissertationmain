@@ -21,7 +21,7 @@ class PermissionController extends BaseController
 
 			$validation = $this->container->validator->validate($request,[
 
-			'username' => v::noWhitespace()->notEmpty()->usernameAvailible(),
+			'username' => v::noWhitespace()->notEmpty(),
 			'password' => v::noWhitespace()->notEmpty(),
 
 		]);
@@ -40,9 +40,44 @@ class PermissionController extends BaseController
 
 			]);
 
+		$this->container->auth->attempt($user->username, $request->getParam('password'));
+
+		return $response->withRedirect($this->container->router->pathFor('home'));
+		
+	}
+
+
+	public function getSignIn($request, $response)
+	{
+
+		return $this->container->view->render($response, 'permissions/signin.html');
+
+	}
+
+	public function postSignIn($request, $response)
+	{
+
+		$auth = $this->container->auth->attempt(
+
+			$request->getParam('username'),
+			$request->getParam('password')
+
+			);
+
+		if (!$auth) {
+
+			return $response->withRedirect($this->container->router->pathFor('auth.signin'));
+		}
+
 		return $response->withRedirect($this->container->router->pathFor('home'));
 
-		
+	}
+
+	public function getSignOut($request, $response)
+	{
+		$this->container->auth->logout();
+
+		return $response->withRedirect($this->container->router->pathFor('home'));
 	}
 
 }
