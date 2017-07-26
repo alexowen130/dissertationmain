@@ -2,19 +2,28 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Marking Standardisation</a>
+      <a class="navbar-brand" href="{{ path_for('home') }}">Marking Standardisation</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
 
-      <ul class="nav navbar-nav">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Submission</a></li>
-        <li><a href="#">Results</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Sign In</a></li>
-        <li><a href="#">Sign Out</a></li>
+      {% if auth.check %}
+
+        <ul class="nav navbar-nav">
+          <li><a href="{{ path_for('home') }}">Home</a></li>
+            <li><a href="#">Submission</a></li>
+            <li><a href="#">Results</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{{ path_for('home') }}"> {{ auth.user.username }}</a></li>
+          <li><a href="{{ path_for('auth.signout') }}">Sign Out</a></li>
+
+      {% else %}
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="{{ path_for('auth.signin') }}">Sign In</a></li>
+      {% endif %}
+
       </ul>
   </div><!-- /.container-fluid -->
 </nav>
