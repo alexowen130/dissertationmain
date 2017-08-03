@@ -40,6 +40,8 @@ class PermissionController extends BaseController
 
 			]);
 
+		$this->container->flash->addMessage('info', 'Welcome, You have created an Account');
+
 		$this->container->auth->attempt($user->username, $request->getParam('password'));
 
 		return $response->withRedirect($this->container->router->pathFor('home'));
@@ -66,8 +68,13 @@ class PermissionController extends BaseController
 
 		if (!$auth) {
 
+			$this->container->flash->addMessage('error', 'Could not authorise your details, please try again');
+
 			return $response->withRedirect($this->container->router->pathFor('auth.signin'));
+
 		}
+
+		$this->container->flash->addMessage('info', 'Welcome, You have signed in');
 
 		return $response->withRedirect($this->container->router->pathFor('home'));
 
@@ -76,6 +83,8 @@ class PermissionController extends BaseController
 	public function getSignOut($request, $response)
 	{
 		$this->container->auth->logout();
+
+		$this->container->flash->addMessage('info', 'You have signed out sucessfully');
 
 		return $response->withRedirect($this->container->router->pathFor('home'));
 	}

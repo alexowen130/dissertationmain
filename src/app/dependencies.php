@@ -1,12 +1,15 @@
 <?php
 
-use Respect\Validation\Validator as v;
+// use Respect\Validation\Validator as v;
 
 session_start();
+
+//Adds to autoload when App starts
 
 require __DIR__ . '/../../vendor/autoload.php';
 
 
+//DB connection Setting
 $app = new \Slim\App([
 	'settings'=> [
 		'displayErrorDetails' => true,
@@ -23,9 +26,12 @@ $app = new \Slim\App([
 	],
 ]);
 
+//Intialises Container for App
 
 $container = $app->getContainer();
 
+
+//Sets up DB connection
 $capsule = new \Illuminate\Database\Capsule\Manager;
 
 $capsule->addConnection($container['settings']['db']);
@@ -37,11 +43,17 @@ $container['db'] = function ($container) use ($capsule) {
 	return $capsule;
 };
 
+//Adds Authentication into App
 $container['auth'] = function($container) {
 	return new \App\authentication\Auth($container);
 };
 
+//Adds Flash messages package to allow messages to be shown when criteria are hit 
+$container['flash'] = function($container) {
+	return new \Slim\Flash\Messages();
+};
 
+//Adds template pages to App to be displayed when URI is loaded
 $container['view'] = function ($container) {
 	$view = new \Slim\Views\Twig(__DIR__ . '/../templates', [
 		'cache' => false,
@@ -51,11 +63,14 @@ $container['view'] = function ($container) {
 		$container->request->getUri()
 		));
 
+//Checks user is logged in by checking DB once and then loading user ID into Session so stop repeated DB hits
 	$view->getEnvironment()->addGlobal('auth', [
 		'check' => $container->auth->signedIn(),
 		'user' => $container->auth->user(),
 
 		]);
+
+		$view->getEnvironment()->addGlobal('flash', $container->flash);
 
 		return $view;
 };
