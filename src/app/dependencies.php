@@ -91,6 +91,10 @@ $container['validator'] = function ($container){
 $container['HomeController'] = function($container) {
 	return new \App\controllers\HomeController($container);
 };
+
+$container['SubmitController'] = function($container) {
+	return new \App\controllers\downloadfile\SubmitController($container);
+};
 ///////End of Controlllers /////////
 
 ////// Authentication ////////////

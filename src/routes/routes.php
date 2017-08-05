@@ -17,4 +17,4 @@ $app->get('/signout', 'PermissionController:getSignOut')->setName('auth.signout'
 //Submmiting Files
 
 $app->get('/submit', 'SubmitController:getdownload')->setName('submit.download');
-$app->post('/submit', 'SubmitController:postSignIn');
+$app->post('/submit', 'SubmitController:postdownload');
