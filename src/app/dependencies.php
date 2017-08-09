@@ -1,7 +1,5 @@
 <?php
 
-// use Respect\Validation\Validator as v;
-
 session_start();
 
 //Adds to autoload when App starts
@@ -29,6 +27,8 @@ $app = new \Slim\App([
 //Intialises Container for App
 
 $container = $app->getContainer();
+
+$container['upload_directory'] = __DIR__ . '/uploads';
 
 
 //Sets up DB connection
@@ -95,6 +95,7 @@ $container['HomeController'] = function($container) {
 $container['SubmitController'] = function($container) {
 	return new \App\controllers\downloadfile\SubmitController($container);
 };
+
 ///////End of Controlllers /////////
 
 ////// Authentication ////////////
