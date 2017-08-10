@@ -10,6 +10,7 @@ class download extends Model
 
 		'filename',
 		'filetype',
+		'filelocation',
 
 	];
 

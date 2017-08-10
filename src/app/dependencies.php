@@ -28,9 +28,6 @@ $app = new \Slim\App([
 
 $container = $app->getContainer();
 
-$container['upload_directory'] = __DIR__ . '/uploads';
-
-
 //Sets up DB connection
 $capsule = new \Illuminate\Database\Capsule\Manager;
 
