@@ -9,84 +9,92 @@ use Respect\Validation\Validator as v;
 class PermissionController extends BaseController
 {
 
-	public function getSignUp($request, $response)
-	 {
-	 	return $this->container->view->render($response, 'permissions/signup.html');
+    //Returns Sign In Page
+    public function getSignUp($request, $response)
+    {
+        return $this->container->view->render($response, 'permissions/signup.html');
 
-	}
+    }
 
+    //Gets Info from user to create new user
+    public function postSignUp($request, $response)
+    {
 
-	public function postSignUp($request, $response)
-	{
+            $validation = $this->container->validator->validate(
+                $request, [
 
-			$validation = $this->container->validator->validate($request,[
+                'username' => v::noWhitespace()->notEmpty(),
+                'password' => v::noWhitespace()->notEmpty(),
 
-			'username' => v::noWhitespace()->notEmpty(),
-			'password' => v::noWhitespace()->notEmpty(),
+                ]
+            );
 
-		]);
+            //If validation fails tells user what issue is present
+            if ($validation->failed()) {
 
-		if ($validation->failed()){
+                return $response->withRedirect($this->container->router->pathFor('auth.signup'));
 
-			return $response->withRedirect($this->container->router->pathFor('auth.signup'));
+            }
 
-		}
+            //Creates new user in DB
+            $user = User::create(
+                [
 
+                'username' => $request->getParam('username'),
+                'password' => password_hash($request->getParam('password'), PASSWORD_DEFAULT),
 
-		$user = User::create([
+                ]
+            );
 
-			'username' => $request->getParam('username'),
-			'password' => password_hash($request->getParam('password'), PASSWORD_DEFAULT),
+            //Flash message for account setup Sucess
+            $this->container->flash->addMessage('info', 'Welcome, You have created an Account');
 
-			]);
+            $this->container->auth->attempt($user->username, $request->getParam('password'));
 
-		$this->container->flash->addMessage('info', 'Welcome, You have created an Account');
+            return $response->withRedirect($this->container->router->pathFor('home'));
+    }
 
-		$this->container->auth->attempt($user->username, $request->getParam('password'));
+    // Gets Sign In Page
+    public function getSignIn($request, $response)
+    {
 
-		return $response->withRedirect($this->container->router->pathFor('home'));
-		
-	}
+        return $this->container->view->render($response, 'permissions/signin.html');
 
+    }
 
-	public function getSignIn($request, $response)
-	{
+    //Checks Log In attempt information
+    public function postSignIn($request, $response)
+    {
 
-		return $this->container->view->render($response, 'permissions/signin.html');
+        $auth = $this->container->auth->attempt(
+            $request->getParam('username'),
+            $request->getParam('password')
+        );
 
-	}
+        if (!$auth) {
 
-	public function postSignIn($request, $response)
-	{
+            $this->container->flash->addMessage('error', 'Could not authorise your details, please try again');
 
-		$auth = $this->container->auth->attempt(
+            return $response->withRedirect($this->container->router->pathFor('auth.signin'));
 
-			$request->getParam('username'),
-			$request->getParam('password')
+        }
 
-			);
+        //Flash message confirming LogIn
+        $this->container->flash->addMessage('info', 'Welcome, You have signed in');
 
-		if (!$auth) {
+        //Redirects back to home
+        return $response->withRedirect($this->container->router->pathFor('home'));
 
-			$this->container->flash->addMessage('error', 'Could not authorise your details, please try again');
+    }
 
-			return $response->withRedirect($this->container->router->pathFor('auth.signin'));
+    //Logs User Out
+    public function getSignOut($request, $response)
+    {
+        $this->container->auth->logout();
 
-		}
+        $this->container->flash->addMessage('info', 'You have signed out sucessfully');
 
-		$this->container->flash->addMessage('info', 'Welcome, You have signed in');
-
-		return $response->withRedirect($this->container->router->pathFor('home'));
-
-	}
-
-	public function getSignOut($request, $response)
-	{
-		$this->container->auth->logout();
-
-		$this->container->flash->addMessage('info', 'You have signed out sucessfully');
-
-		return $response->withRedirect($this->container->router->pathFor('home'));
-	}
+        return $response->withRedirect($this->container->router->pathFor('home'));
+    }
 
 }

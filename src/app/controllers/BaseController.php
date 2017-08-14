@@ -6,15 +6,16 @@ namespace App\Controllers;
 class BaseController
 {
 
-	protected $container;
+	//Creates Container for App
+    protected $container;
 
-	public function __construct($container)
-	{
+    public function __construct($container)
+    {
 
-		$this->container = $container;
+        $this->container = $container;
 
 
-	}
+    }
 
 
 }

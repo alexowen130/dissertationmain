@@ -12,59 +12,60 @@ use App\lib\moveUploadedFile;
 class SubmitController extends BaseController
 {
 
-	//Renders template that is needed
-	public function getDownload($request, $response)
-	{
-	 	return $this->container->view->render($response, 'Filedownload/filedownload.html');
+    //Renders template that is needed
+    public function getDownload($request, $response)
+    {
+        return $this->container->view->render($response, 'Filedownload/filedownload.html');
 
-	}
+    }
 
-	public function postDownload($request, $response)
-	{
+    public function postDownload($request, $response)
+    {
 
-		//Gets the file from template
-		$uploadedFile = $request->getUploadedFiles();
+        //Gets the file from template
+        $uploadedFile = $request->getUploadedFiles();
 
-		$uploadedFile = $uploadedFile['file'];
-
-
-		//Checks if any Errors are present
-   		if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
-
-	
-			//Gets FileName as stored on Server
-   			$uploadedFileName = $request->getUploadedFiles()['file']->getClientFilename();
-
-   			//Gets the FileType
-   			$mediaType = $request->getUploadedFiles()['file']->getClientMediaType();
-
-   			//Moves file to directory
-   			$filename = moveUploadedFile('/var/www/downloads', $uploadedFile);
+        $uploadedFile = $uploadedFile['file'];
 
 
-   			//Adds File to DB
-			$downloads = Download::create([
+        //Checks if any Errors are present
+        if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
 
-			'filename' => $uploadedFileName,
-			'filetype' => $mediaType,
-			'filelocation' => $filename
+            //Gets FileName as stored on Server
+            $uploadedFileName = $request->getUploadedFiles()['file']->getClientFilename();
 
-			]);
+            //Gets the FileType
+            $mediaType = $request->getUploadedFiles()['file']->getClientMediaType();
 
-   			//Displays message confirming Sucess
-			$this->container->flash->addMessage('info', 'You have sucessfully Uploaded a File! Are there any more to submit');
+            //Moves file to directory
+            $filename = moveUploadedFile('/var/www/downloads', $uploadedFile);
 
-			//Returns to Submission Page
-			return $response->withRedirect($this->container->router->pathFor('submit.download'));
-	}
 
-	//Displays Errors
-	$this->container->flash->addMessage('error', 'We are unable to upload your file please try again!');
+            //Adds File to DB
+            $downloads = Download::create(
+                [
 
-	//Returns to Submission Page
-	return $response->withRedirect($this->container->router->pathFor('submit.download'));
+                'filename' => $uploadedFileName,
+                'filetype' => $mediaType,
+                'filelocation' => $filename
 
-}
+                ]
+            );
+
+            //Displays message confirming Sucess
+            $this->container->flash->addMessage('info', 'You have sucessfully Uploaded a File! Are there any more to submit');
+
+            //Returns to Submission Page
+            return $response->withRedirect($this->container->router->pathFor('submit.download'));
+        }
+
+        //Displays Errors
+        $this->container->flash->addMessage('error', 'We are unable to upload your file please try again!');
+
+        //Returns to Submission Page
+        return $response->withRedirect($this->container->router->pathFor('submit.download'));
+
+    }
 
 }
 

@@ -7,13 +7,13 @@ use Slim\Views\Twig as View;
 use App\models\user;
 
 
+//Base Template Controller
 class HomeController extends BaseController
 {
 
-	public function index($request, $response)
-	{
+    public function index($request, $response)
+    {
 
-		return $this->container->view->render($response, 'tutor/tutor.html');
-	
-	}
+        return $this->container->view->render($response, 'tutor/tutor.html');
+    }
 }

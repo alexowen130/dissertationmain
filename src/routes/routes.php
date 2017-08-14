@@ -1,5 +1,8 @@
 <?php
 
+/**
+Sets the URLS for the application 
+**/
 
 $app->get('/', 'HomeController:index')->setName('home');
 

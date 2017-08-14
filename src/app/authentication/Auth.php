@@ -1,50 +1,53 @@
 <?php
 
+/**
+Controls Authentication of App
+**/
+
 namespace App\Authentication;
 
 use App\models\user;
 
+//Talks to DB to setup and check user
 class Auth
 {
 
-	public function user()
-	{
+    public function user()
+    {
+        return User::find($_SESSION['user']);
+    }
 
-		return User::find($_SESSION['user']);
-	}
+    public function signedIn()
+    {
 
-	public function signedIn()
-	{
+        return isset($_SESSION['user']);
+    }
 
-		return isset($_SESSION['user']);
+    //For User to attempt to log in
+    public function attempt($username, $password)
+    {
 
-	}
+        $user = User::where('username', $username)->first();
 
+        if (!$user) {
 
-	public function attempt($username, $password)
-	{
+            return false;
+        }
 
-		$user = User::where('username', $username)->first();
+        if (password_verify($password, $user->password)) {
 
-		if (!$user) {
+            $_SESSION['user'] = $user->id;
+            return true;
+        }
 
-			return false;
-		}
+        return false;
 
-		if (password_verify($password, $user->password)) {
+    }
 
-			$_SESSION['user'] = $user->id;
-			return true;
-		}
+    //Logs Out
+    public function logout()
+    {
+        unset($_SESSION['user']);
 
-		return false;
-
-	}
-
-	public function logout()
-	{
-		unset($_SESSION['user']);
-
-
-	}
+    }
 }

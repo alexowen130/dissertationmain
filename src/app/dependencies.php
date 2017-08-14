@@ -1,5 +1,9 @@
 <?php
 
+/**
+Dependancies loaded into App and added to container
+ **/
+
 session_start();
 
 //Adds to autoload when App starts
@@ -8,21 +12,23 @@ require __DIR__ . '/../../vendor/autoload.php';
 
 
 //DB connection Setting
-$app = new \Slim\App([
-	'settings'=> [
-		'displayErrorDetails' => true,
-		'db' => [
-			'driver' => 'mysql',
-			'host' => 'localhost',
-			'database' => 'markingdb',
-			'username' => 'root',
-			'password' => 'Earnshaw10',
-			'charset' => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix' => '',
-		]
-	],
-]);
+$app = new \Slim\App(
+    [
+    'settings'=> [
+        'displayErrorDetails' => true,
+        'db' => [
+            'driver' => 'mysql',
+            'host' => 'localhost',
+            'database' => 'markingdb',
+            'username' => 'root',
+            'password' => 'Earnshaw10',
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+        ]
+    ],
+    ]
+);
 
 //Intialises Container for App
 
@@ -37,60 +43,68 @@ $capsule->bootEloquent();
 
 
 $container['db'] = function ($container) use ($capsule) {
-	return $capsule;
+    return $capsule;
 };
 
 //Adds Authentication into App
 $container['auth'] = function($container) {
-	return new \App\authentication\Auth($container);
+    return new \App\authentication\Auth($container);
 };
 
 //Adds Flash messages package to allow messages to be shown when criteria are hit 
 $container['flash'] = function($container) {
-	return new \Slim\Flash\Messages();
+    return new \Slim\Flash\Messages();
 };
 
 //Adds template pages to App to be displayed when URI is loaded
 $container['view'] = function ($container) {
-	$view = new \Slim\Views\Twig(__DIR__ . '/../templates', [
-		'cache' => false,
-		]);
-	$view->addExtension(new \Slim\Views\TwigExtension(
-		$container->router,
-		$container->request->getUri()
-		));
+    $view = new \Slim\Views\Twig(
+        __DIR__ . '/../templates', [
+        'cache' => false,
+        ]
+    );
 
-//Checks user is logged in by checking DB once and then loading user ID into Session so stop repeated DB hits
-	$view->getEnvironment()->addGlobal('auth', [
-		'check' => $container->auth->signedIn(),
-		'user' => $container->auth->user(),
+    $view->addExtension(
+        new \Slim\Views\TwigExtension(
+            $container->router,
+            $container->request->getUri()
+        )
+    );
 
-		]);
+    //Checks user is logged in checks DB once and then loading user ID into Session
 
-		$view->getEnvironment()->addGlobal('flash', $container->flash);
+    $view->getEnvironment()->addGlobal(
+        'auth', [
+        'check' => $container->auth->signedIn(),
+        'user' => $container->auth->user(),
 
-		return $view;
+        ]
+    );
+
+        $view->getEnvironment()->addGlobal('flash', $container->flash);
+
+        return $view;
 };
 
 ///////Start of Controllers
 
 
 $container['PermissionController'] = function($container) {
-	return new \App\controllers\auth\PermissionController($container);
+    return new \App\controllers\auth\PermissionController($container);
 };
 
-$container['validator'] = function ($container){
+$container['validator'] = function ($container) {
 
-	return new \App\validation\validator;
+    return new \App\validation\validator;
 
 };
 
 $container['HomeController'] = function($container) {
-	return new \App\controllers\HomeController($container);
+    return new \App\controllers\HomeController($container);
 };
 
 $container['SubmitController'] = function($container) {
-	return new \App\controllers\downloadfile\SubmitController($container);
+    return new \App\controllers\downloadfile\SubmitController($container);
 };
 
 ///////End of Controlllers /////////
