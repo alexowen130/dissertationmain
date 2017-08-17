@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<table>
+	<tr>
+    	<th>Submission ID</th>
+    	<th>File Name</th>
+    	<th>Coding Standards Result</th>
+	</tr>
+	
+    {% for data in download %}
+
+        <tr>
+            <td> {{ attribute(data, 'id')  }} </td>
+            <td>{{ attribute(data, 'filename')  }}</td>
+            <td>3</td>
+        </tr>
+
+
+
+    {% endfor %}
+
+
+    
+	</table>
+
+
+{% endblock %}

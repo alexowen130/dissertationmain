@@ -7,3 +7,9 @@ footer {
   background-color: #efefef;
   text-align: center;
 }
+
+th {
+	width:200px;
+	border-bottom-style: solid;
+	border-bottom-color: back;
+}

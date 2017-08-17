@@ -51,6 +51,11 @@ $container['auth'] = function($container) {
     return new \App\authentication\Auth($container);
 };
 
+//Adds Submission Display Fuction
+$container['submission'] = function($container) {
+    return new \App\Submission\SubmissionDisplay($container);
+};
+
 //Adds Flash messages package to allow messages to be shown when criteria are hit 
 $container['flash'] = function($container) {
     return new \Slim\Flash\Messages();
@@ -105,6 +110,10 @@ $container['HomeController'] = function($container) {
 
 $container['SubmitController'] = function($container) {
     return new \App\controllers\downloadfile\SubmitController($container);
+};
+
+$container['ResultController'] = function($container) {
+    return new \App\controllers\downloadresults\ResultController($container);
 };
 
 ///////End of Controlllers /////////

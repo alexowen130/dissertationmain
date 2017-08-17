@@ -18,6 +18,10 @@ $app->post('/signin', 'PermissionController:postSignIn');
 $app->get('/signout', 'PermissionController:getSignOut')->setName('auth.signout');
 
 //Submmiting Files
-
 $app->get('/submit', 'SubmitController:getdownload')->setName('submit.download');
 $app->post('/submit', 'SubmitController:postdownload');
+
+//Displaying Results
+$app->get('/results', 'ResultController:getResults')->setName('results.download');
+
+
