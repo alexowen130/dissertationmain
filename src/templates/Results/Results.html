@@ -6,24 +6,25 @@
 	<tr>
     	<th>Submission ID</th>
     	<th>File Name</th>
+        <th>File Type</th>
     	<th>Coding Standards Result</th>
 	</tr>
 	
     {% for data in download %}
 
         <tr>
-            <td> {{ attribute(data, 'id')  }} </td>
-            <td>{{ attribute(data, 'filename')  }}</td>
-            <td>3</td>
+            <td> {{ attribute(data, 'id') }} </td>
+            <td> {{ attribute(data, 'filename')  }}</td>
+            <td> {{ attribute(data, 'filetype')  }}</td>
+            <td> <a href="{{ attribute(data, 'filetype')  }}"> {{ attribute(data, 'filetype')  }}</a></td>
         </tr>
 
 
 
     {% endfor %}
 
-
+        
     
 	</table>
-
 
 {% endblock %}

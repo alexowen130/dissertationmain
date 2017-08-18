@@ -15,6 +15,13 @@ class ResultController extends BaseController
 
 	$download = $this->container->submission->download();
 
+	for($i; $i < sizeof($download); $i++){
+		
+		$filelocation = $download[$i]['filelocation'];
+
+		$codeCheck = $this->container->submission->codeLint($filelocation);
+	}
+
 
         return $this->container->view->render($response, 'Results/Results.html', array(
         		'download' => $download,

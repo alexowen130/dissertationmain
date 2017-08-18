@@ -16,32 +16,26 @@ class SubmissionDisplay
     public function download()
     {
         $downloads = Download::all();
-    // Download::table('downloads')->get();
-
-    // $size = sizeof($downloads);
-
-    // $fileId;
-    // $download = array();
-
-    // for ($i = 0; $i < $size; $i++) {
-
-    //     array_push($download, $downloads[$i]);
-
-    // }
 
     return $downloads;
+    }  
 
 
-    // foreach ($downloads as $download) {
-    //     return sizeof($downloads);
-    // }
+    //Copes with JS, PHP, CSS
+    public function codeLint($filename)
+    {
+
+        $output = shell_exec('../../vendor/bin/phpcs --report=json --report-file=/var/www/Reports/'.$filename.'.json /var/www/downloads/' . $filename);
+            
+
+        echo $output;
+
+
+
+            return $output;
     
+    }
 
-    // public function signedIn()
-    // {
-
-    //     return isset($_SESSION['user']);
-    // }
 
     // //For User to attempt to log in
     // public function attempt($username, $password)
@@ -69,4 +63,4 @@ class SubmissionDisplay
     // {
     //     unset($_SESSION['user']);
 
-}}
+}
