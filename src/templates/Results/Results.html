@@ -8,6 +8,7 @@
     	<th>File Name</th>
         <th>File Type</th>
     	<th>Coding Standards Result</th>
+        <th>Unit Test Result</th>
 	</tr>
 	
     {% for data in download %}
@@ -16,7 +17,8 @@
             <td> {{ attribute(data, 'id') }} </td>
             <td> {{ attribute(data, 'filename')  }}</td>
             <td> {{ attribute(data, 'filetype')  }}</td>
-            <td> <a href="{{ attribute(data, 'filetype')  }}"> {{ attribute(data, 'filetype')  }}</a></td>
+            <td> <a href="{{ path_for('results.download') ~ '/' ~ attribute(data, 'lintresult')  }}"> Download </a></td>
+            <td> <a href="{{ path_for('results.download') ~ '/' ~ attribute(data, 'lintresult')  }}"> Download </a></td>
         </tr>
 
 

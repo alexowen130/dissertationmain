@@ -15,13 +15,24 @@ class ResultController extends BaseController
 
 	$download = $this->container->submission->download();
 
-	for($i; $i < sizeof($download); $i++){
+	for($i =1; $i < sizeof($download); $i++){
 		
 		$filelocation = $download[$i]['filelocation'];
+        $fileid = $download[$i]['id'];
 
 		$codeCheck = $this->container->submission->codeLint($filelocation);
+
+
+        $results = Download::find($fileid)->update(array(
+
+            'lintresult' => $filelocation.'.json',
+            ));
+
 	}
 
+      //Displays message confirming Sucess
+            $this->container->flash->addMessage('info', 'Your files have been sucessfully checked, please download the files to see the results');
+        
 
         return $this->container->view->render($response, 'Results/Results.html', array(
         		'download' => $download,
@@ -30,5 +41,6 @@ class ResultController extends BaseController
     }
     
 }
+
 
 

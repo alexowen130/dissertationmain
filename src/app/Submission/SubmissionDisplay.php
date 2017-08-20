@@ -26,14 +26,7 @@ class SubmissionDisplay
     {
 
         $output = shell_exec('../../vendor/bin/phpcs --report=json --report-file=/var/www/Reports/'.$filename.'.json /var/www/downloads/' . $filename);
-            
-
-        echo $output;
-
-
-
-            return $output;
-    
+            return $output;  
     }
 
 

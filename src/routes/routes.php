@@ -24,4 +24,5 @@ $app->post('/submit', 'SubmitController:postdownload');
 //Displaying Results
 $app->get('/results', 'ResultController:getResults')->setName('results.download');
 
+$app->get('/results/{filename}', 'DownloadingController:getDownload')->setName('downloading.download');
 

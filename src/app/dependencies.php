@@ -1,5 +1,7 @@
 <?php
 
+define('ROOT_PATH', dirname(dirname(__DIR__)));
+
 /**
 Dependancies loaded into App and added to container
  **/
@@ -114,6 +116,10 @@ $container['SubmitController'] = function($container) {
 
 $container['ResultController'] = function($container) {
     return new \App\controllers\downloadresults\ResultController($container);
+};
+
+$container['DownloadingController'] = function($container) {
+    return new \App\controllers\downloadresults\DownloadingController($container);
 };
 
 ///////End of Controlllers /////////
