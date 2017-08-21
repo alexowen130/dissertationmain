@@ -17,7 +17,7 @@ class SubmissionDisplay
     {
         $downloads = Download::all();
 
-    return $downloads;
+        return $downloads;
     }  
 
 

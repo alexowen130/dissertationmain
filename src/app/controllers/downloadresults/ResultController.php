@@ -13,30 +13,34 @@ class ResultController extends BaseController
     public function getResults($request, $response)
     {
 
-	$download = $this->container->submission->download();
+        $download = $this->container->submission->download();
 
-	for($i =1; $i < sizeof($download); $i++){
-		
-		$filelocation = $download[$i]['filelocation'];
-        $fileid = $download[$i]['id'];
+        for ($i =1; $i < sizeof($download); $i++) {
 
-		$codeCheck = $this->container->submission->codeLint($filelocation);
+            $filelocation = $download[$i]['filelocation'];
+            $fileid = $download[$i]['id'];
+
+            $codeCheck = $this->container->submission->codeLint($filelocation);
 
 
-        $results = Download::find($fileid)->update(array(
+            $results = Download::find($fileid)->update(
+                array(
 
-            'lintresult' => $filelocation.'.json',
-            ));
+                'lintresult' => $filelocation.'.json',
+                )
+            );
 
-	}
+        }
 
-      //Displays message confirming Sucess
+        //Displays message confirming Sucess
             $this->container->flash->addMessage('info', 'Your files have been sucessfully checked, please download the files to see the results');
         
 
-        return $this->container->view->render($response, 'Results/Results.html', array(
-        		'download' => $download,
-        	));
+        return $this->container->view->render(
+            $response, 'Results/Results.html', array(
+            'download' => $download,
+            )
+        );
 
     }
     

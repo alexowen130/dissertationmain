@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Download extends Model
 {
 
-	protected $table = 'downloads';
+    protected $table = 'downloads';
 
     //Only columns added here can be used to update DB with user information
     protected $fillable = [
