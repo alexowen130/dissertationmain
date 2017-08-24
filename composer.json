@@ -6,7 +6,8 @@
         "illuminate/database": "^5.4",
         "respect/validation": "^1.1",
         "slim/flash": "^0.2.0",
-        "squizlabs/php_codesniffer": "*"
+        "squizlabs/php_codesniffer": "*",
+        "phpunit/phpunit": "^6.2"
     },
     "autoload": {
     	"psr-4": {
