@@ -32,10 +32,11 @@ class ResultController extends BaseController
 
         }
 
+
         //Displays message confirming Sucess
             $this->container->flash->addMessage('info', 'Your files have been sucessfully checked, please download the files to see the results');
         
-
+            
         return $this->container->view->render(
             $response, 'Results/Results.html', array(
             'download' => $download,

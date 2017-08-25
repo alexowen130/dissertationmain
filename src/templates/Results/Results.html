@@ -15,11 +15,10 @@
 
         <tr>
             <td> {{ attribute(data, 'id') }} </td>
-            <td> {{ attribute(data, 'filename')  }}</td>
+            <td> <a href="{{ path_for('results.download') ~ '/file/' ~ attribute(data, 'filelocation')  }}"> {{  attribute(data, 'filename')  }} </a></td>
             <td> {{ attribute(data, 'filetype')  }}</td>
             <td> 
-               <a href="{{ path_for('results.download') ~ '/' ~ attribute(data, 'lintresult')  }}"> Download </a>
-                <a href="{{ path_for('results.download') ~ '/' ~ attribute(data, 'lintresult')  }}"> View </a>
+               <a href="{{ path_for('results.download') ~ '/' ~ attribute(data, 'lintresult')  }}"> Download / View </a>
             </td>
             <td>Pass / Fail </td>
         </tr>

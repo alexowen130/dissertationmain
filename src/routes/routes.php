@@ -27,5 +27,4 @@ $app->get('/results', 'ResultController:getResults')->setName('results.download'
 //Download Coding Standards Results
 $app->get('/results/{filename}', 'DownloadingController:getDownload')->setName('downloading.download');
 
-//View Coding Standards Results in Browers
-$app->get('/results/view/{filename}', 'ViewController:getView')->setName('downloading.view');
+$app->get('/results/file/{filename}', 'DownloadingController:getFile')->setName('downloading.file');

@@ -122,9 +122,6 @@ $container['DownloadingController'] = function($container) {
     return new \App\controllers\downloadresults\DownloadingController($container);
 };
 
-$container['ViewController'] = function($container) {
-    return new \App\controllers\downloadresults\ViewController($container);
-};
 
 ///////End of Controlllers /////////
 
