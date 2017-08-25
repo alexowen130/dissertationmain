@@ -27,7 +27,7 @@ class DownloadingController extends BaseController
             header('Pragma: public');
             header('Content-Length: ' . filesize($file));
             readfile($file);
-            exit;
+
 
         }
     }

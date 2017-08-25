@@ -21,8 +21,11 @@ $app->get('/signout', 'PermissionController:getSignOut')->setName('auth.signout'
 $app->get('/submit', 'SubmitController:getdownload')->setName('submit.download');
 $app->post('/submit', 'SubmitController:postdownload');
 
-//Displaying Results
+//Displaying FIles uploaed
 $app->get('/results', 'ResultController:getResults')->setName('results.download');
 
+//Download Coding Standards Results
 $app->get('/results/{filename}', 'DownloadingController:getDownload')->setName('downloading.download');
 
+//View Coding Standards Results in Browers
+$app->get('/results/view/{filename}', 'ViewController:getView')->setName('downloading.view');
