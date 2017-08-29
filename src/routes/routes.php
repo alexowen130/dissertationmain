@@ -27,4 +27,8 @@ $app->get('/results', 'ResultController:getResults')->setName('results.download'
 //Download Coding Standards Results
 $app->get('/results/{filename}', 'DownloadingController:getDownload')->setName('downloading.download');
 
+//Downloads Original File
 $app->get('/results/file/{filename}', 'DownloadingController:getFile')->setName('downloading.file');
+
+
+$app->get('/unittest', 'UnittestController:getTest')->setName('unittest.file');

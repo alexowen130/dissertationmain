@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Submitting Unit Tests</h2>
+<p>
+	To be able to run Unit Testing you must know the function that we are testing. If this has been standardised Upload a file for the relevant language. Please find a template for the relevant language at the bottom of the page below. To find out more check out the documentation for <a href="https://phpunit.de/" >PHPUnit</a> and <a href="https://qunitjs.com/">QUnit</a>.
+</p>
+
+<div class="submiting">
+	<form method="post" enctype="multipart/form-data">
+    	<!-- upload of a single file -->
+    	<p>
+        	<label>Add file (single): </label><br/>
+        	<input type="file" name="file"/>
+    	</p>
+
+
+    	<p>
+        	<input type="submit"/>
+    	</p>
+	</form>
+</div>
+
+<form action = "{{ path_for('unittest.file') }}">
+	 <input type="submit" class="btn btn-primary btn-lg btn-block" value="Setting Up Coding Standards" />
+</form>
+
+<div class="exampletable">
+	<table>
+		<tr>
+			<th>Language</th>
+			<th>Example Unit Test</th>
+		</tr>
+		<tr>
+			<td>PHP</td>
+			<td><a href="">Download <span class="glyphicon glyphicon-download-alt
+
+"></a></td>
+		</tr>
+		<tr>
+			<td>JavaScript</td>
+			<td><a href="">Download <span class="glyphicon glyphicon-download-alt
+
+"></a></td>
+
+		</tr>
+	</table>
+
+</div>
+
+
+{% endblock %}

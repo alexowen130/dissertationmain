@@ -122,6 +122,9 @@ $container['DownloadingController'] = function($container) {
     return new \App\controllers\downloadresults\DownloadingController($container);
 };
 
+$container['UnittestController'] = function($container) {
+    return new \App\controllers\downloadresults\UnittestController($container);
+};
 
 ///////End of Controlllers /////////
 

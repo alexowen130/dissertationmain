@@ -2,16 +2,29 @@
 
 {% block content %}
 
+<h2>Submitting a File</h2>
+<p>
+	Use the selector to browse to the file that you are looking to submit, once you have submitted all the file you want to submit, we will look at the setup for Unit Testing.
+</p>
+<div class="submiting">
 	<form method="post" enctype="multipart/form-data">
-    <!-- upload of a single file -->
-    <p>
-        <label>Add file (single): </label><br/>
-        <input type="file" name="file"/>
-    </p>
+	    <!-- upload of a single file -->
+	    <p>
+	        <label>Add file (single): </label><br/>
+	        <input type="file" name="file"/>
+	    </p>
 
 
-    <p>
-        <input type="submit"/>
-    </p>
+	    <p>
+	        <input type="submit"/>
+	    </p>
+	</form>
+</div>
+
+<form action = "{{ path_for('unittest.file') }}">
+	 <input type="submit" class="btn btn-primary btn-lg btn-block" value="Creating and Adding Unit Tests" />
 </form>
+
+
+
 {% endblock %}

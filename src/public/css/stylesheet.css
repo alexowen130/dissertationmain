@@ -1,4 +1,4 @@
-footer {
+.footer {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -12,4 +12,19 @@ th {
 	width:200px;
 	border-bottom-style: solid;
 	border-bottom-color: back;
+}
+
+.Introduction {
+  margin-bottom:10em;
+}
+
+.submiting {
+  margin-bottom:10em;
+  padding-left: 5em;
+  padding-top: 2em;
+}
+
+.exampletable{
+  margin-top: 4em;
+
 }

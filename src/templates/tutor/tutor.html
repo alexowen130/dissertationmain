@@ -5,18 +5,31 @@
 	<div class = "row">
 		<div class = "col-md-6 col-offset-3">
 
-		<div class="progress">
-  <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-    <span class="sr-only">0% Complete</span>
   </div>
 </div>
+	<div class="Introduction">
+		<h2>Introduction</h2>
+		
+		<p>
+			Welcome to the Marking Application, by submitting a file it will be run through a number of tests.
+		</p>
+		<br>
 
-		Welcome to the Marking Application, by submitting a file it will be run through a number of tests.
+		<p>
+			After submitting the files, you will need to setup the Unit Test that you would like to run on the files, you also have the option to specify which set of standards that you would like to run on the files. This will be covered as we go step by step
+		</p>
+	</div>
 
+		<form action = "{{ path_for('submit.download') }}">
+			 <input type="submit" class="btn btn-primary btn-lg btn-block" value="Submit a File" />
+		</form>
+			
+			<h3>TODO</h3>
 
-			<span class="label label-primary">1:) Linter - Only PHP</span><br><br>
-			<span class="label label-danger">TODO :	Include Linter for PHP, JAVA SETUP </span><br><br>
-			<span class="label label-danger"> UNIT TESTING SUIT</span><br><br>
+			<span class="label label-primary">1:) Linter - PHP, JavaScript and CSS, Standard Config only, look at creating Config</span><br><br>
+			
+			<span class="label label-primary">2:) Unit Testing - Qunit installed for JS and PHPUnit for PHP</span><br><br>
+			<span class="label label-danger"> 2:) Unit Testing - Allow files to be added to check against submitted file</span><br><br>
 
 
 		</div>

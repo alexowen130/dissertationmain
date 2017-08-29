@@ -8,22 +8,34 @@
     	<th>File Name</th>
         <th>File Type</th>
     	<th>Coding Standards Result</th>
+        <th>Unit Test Submmision</th>
         <th>Unit Test Result</th>
 	</tr>
 	
     {% for data in download %}
 
         <tr>
-            <td> {{ attribute(data, 'id') }} </td>
-            <td> <a href="{{ path_for('results.download') ~ '/file/' ~ attribute(data, 'filelocation')  }}"> {{  attribute(data, 'filename')  }} </a></td>
-            <td> {{ attribute(data, 'filetype')  }}</td>
             <td> 
-               <a href="{{ path_for('results.download') ~ '/' ~ attribute(data, 'lintresult')  }}"> Download / View </a>
+                {{ attribute(data, 'id') }} </td>
+            <td>
+                <a href="{{ path_for('results.download') ~ '/file/' ~ attribute(data, 'filelocation')  }}"> {{  attribute(data, 'filename')  }} <span class="glyphicon glyphicon-download-alt
+
+"> </a>
             </td>
-            <td>Pass / Fail </td>
+            <td>
+                {{ attribute(data, 'filetype')  }}</td>
+            <td> 
+                <a href="{{ path_for('results.download') ~ '/' ~ attribute(data, 'lintresult')  }}"> Download <span class="glyphicon glyphicon-download-alt
+
+"> </a>
+            </td>
+            <td>
+                <a href="{{ path_for('unittest.file') ~ attribute(data, 'filelocation') }}"> Submit Unit Test</a>
+            </td>
+            <td>
+                <a href=""> Download </a>
+            </td>
         </tr>
-
-
 
     {% endfor %}
 
