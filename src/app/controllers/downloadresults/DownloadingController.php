@@ -52,18 +52,4 @@ class DownloadingController extends BaseController
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
 }

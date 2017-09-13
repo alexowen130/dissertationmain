@@ -32,3 +32,10 @@ $app->get('/results/file/{filename}', 'DownloadingController:getFile')->setName(
 
 
 $app->get('/unittest', 'UnittestController:getTest')->setName('unittest.file');
+$app->post('/unittest', 'UnittestController:postTestDownload');
+
+//Get example Doc PHP
+$app->get('/unittest/PHP', 'examplephpController:getFilePHP')->setName('unittest.getPHP');
+
+//Get JavaScript example Doc
+$app->get('/unittest/JS', 'exampleJSController:getFileJS')->setName('unittest.getJS');

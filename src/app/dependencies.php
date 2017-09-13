@@ -126,6 +126,14 @@ $container['UnittestController'] = function($container) {
     return new \App\controllers\downloadresults\UnittestController($container);
 };
 
+$container['examplephpController'] = function($container) {
+    return new \App\controllers\downloadresults\examplephpController($container);
+};
+
+$container['exampleJSController'] = function($container) {
+    return new \App\controllers\downloadresults\exampleJSController($container);
+};
+
 ///////End of Controlllers /////////
 
 ////// Authentication ////////////

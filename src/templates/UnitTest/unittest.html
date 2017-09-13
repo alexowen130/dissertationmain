@@ -22,8 +22,8 @@
 	</form>
 </div>
 
-<form action = "{{ path_for('unittest.file') }}">
-	 <input type="submit" class="btn btn-primary btn-lg btn-block" value="Setting Up Coding Standards" />
+<form action = "{{ path_for('results.download') }}">
+	 <input type="submit" class="btn btn-primary btn-lg btn-block" value="Go to Results" />
 </form>
 
 <div class="exampletable">
@@ -34,7 +34,7 @@
 		</tr>
 		<tr>
 			<td>PHP</td>
-			<td><a href="">Download <span class="glyphicon glyphicon-download-alt
+			<td><a href="{{ path_for('unittest.getPHP') ~ examplePHPUNITTEST.php  }}">Download <span class="glyphicon glyphicon-download-alt
 
 "></a></td>
 		</tr>
