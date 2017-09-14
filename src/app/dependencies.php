@@ -49,17 +49,17 @@ $container['db'] = function ($container) use ($capsule) {
 };
 
 //Adds Authentication into App
-$container['auth'] = function($container) {
+$container['auth'] = function ($container) {
     return new \App\authentication\Auth($container);
 };
 
 //Adds Submission Display Fuction
-$container['submission'] = function($container) {
+$container['submission'] = function ($container) {
     return new \App\Submission\SubmissionDisplay($container);
 };
 
 //Adds Flash messages package to allow messages to be shown when criteria are hit 
-$container['flash'] = function($container) {
+$container['flash'] = function ($container) {
     return new \Slim\Flash\Messages();
 };
 
@@ -96,7 +96,7 @@ $container['view'] = function ($container) {
 ///////Start of Controllers
 
 
-$container['PermissionController'] = function($container) {
+$container['PermissionController'] = function ($container) {
     return new \App\controllers\auth\PermissionController($container);
 };
 
@@ -106,31 +106,31 @@ $container['validator'] = function ($container) {
 
 };
 
-$container['HomeController'] = function($container) {
+$container['HomeController'] = function ($container) {
     return new \App\controllers\HomeController($container);
 };
 
-$container['SubmitController'] = function($container) {
+$container['SubmitController'] = function ($container) {
     return new \App\controllers\downloadfile\SubmitController($container);
 };
 
-$container['ResultController'] = function($container) {
+$container['ResultController'] = function ($container) {
     return new \App\controllers\downloadresults\ResultController($container);
 };
 
-$container['DownloadingController'] = function($container) {
+$container['DownloadingController'] = function ($container) {
     return new \App\controllers\downloadresults\DownloadingController($container);
 };
 
-$container['UnittestController'] = function($container) {
+$container['UnittestController'] = function ($container) {
     return new \App\controllers\downloadresults\UnittestController($container);
 };
 
-$container['examplephpController'] = function($container) {
+$container['examplephpController'] = function ($container) {
     return new \App\controllers\downloadresults\examplephpController($container);
 };
 
-$container['exampleJSController'] = function($container) {
+$container['exampleJSController'] = function ($container) {
     return new \App\controllers\downloadresults\exampleJSController($container);
 };
 

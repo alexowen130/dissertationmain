@@ -17,15 +17,16 @@ class UnittestController extends BaseController
     public function getTest($request, $response, $args)
     {
 
-     	$file = '/var/www/Reports/'.$args['filename'];
+        $file = '/var/www/Reports/'.$args['filename'];
             
         return $this->container->view->render(
-            $response, 'UnitTest/unittest.html');
+            $response, 'UnitTest/unittest.html'
+        );
 
     }
 
 
-     public function postTestDownload($request, $response)
+    public function postTestDownload($request, $response)
     {
 
         //Gets the file from template
@@ -45,21 +46,21 @@ class UnittestController extends BaseController
 
 
             switch ($mediaType) {
-                case 'application/x-javascript':
+            case 'application/x-javascript':
                     $filename = moveUploadedFile('/var/www/unitTestJS', $uploadedFile);
                     $this->container->flash->addMessage('info', 'You have sucessfully Uploaded a Unit test file for JavaScript');
-                    return $response->withRedirect($this->container->router->pathFor('unittest.file'));
+                return $response->withRedirect($this->container->router->pathFor('unittest.file'));
                     break;
 
-                case 'application/x-php':
+            case 'application/x-php':
                     $filename = moveUploadedFile('/var/www/unitTestPHP', $uploadedFile);
                     $this->container->flash->addMessage('info', 'You have sucessfully Uploaded a Unit test file for PHP');
-                    return $response->withRedirect($this->container->router->pathFor('unittest.file'));
+                return $response->withRedirect($this->container->router->pathFor('unittest.file'));
                     break;
                 
-                default:
+            default:
                     $this->container->flash->addMessage('error', 'You have not input the correct file type, please try again and refer to the example files at the bottom of the page.');
-                    return $response->withRedirect($this->container->router->pathFor('unittest.file'));
+                return $response->withRedirect($this->container->router->pathFor('unittest.file'));
                     break;
             }
         }

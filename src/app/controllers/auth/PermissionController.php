@@ -30,11 +30,11 @@ class PermissionController extends BaseController
             );
 
             //If validation fails tells user what issue is present
-            if ($validation->failed()) {
+        if ($validation->failed()) {
 
                 return $response->withRedirect($this->container->router->pathFor('auth.signup'));
 
-            }
+        }
 
             //Creates new user in DB
             $user = User::create(

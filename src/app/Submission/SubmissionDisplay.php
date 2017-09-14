@@ -2,7 +2,7 @@
 
 /**
 Controls Authentication of App
-**/
+ **/
 
 
 namespace App\Submission;
