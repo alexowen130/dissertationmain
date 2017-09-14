@@ -17,6 +17,7 @@ class Download extends Model
         'filetype',
         'filelocation',
         'lintresult',
+        'unittestresult'
 
     ];
 

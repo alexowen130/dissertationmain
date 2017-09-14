@@ -8,7 +8,6 @@
     	<th>File Name</th>
         <th>File Type</th>
     	<th>Coding Standards Result</th>
-        <th>Unit Test Submmision</th>
         <th>Unit Test Result</th>
 	</tr>
 	
@@ -30,10 +29,7 @@
 "> </a>
             </td>
             <td>
-                <a href="{{ path_for('unittest.file') ~ attribute(data, 'filelocation') }}"> Submit Unit Test</a>
-            </td>
-            <td>
-                <a href=""> Download </a>
+                {{ attribute(data, 'unittestresult') }}
             </td>
         </tr>
 

@@ -22,11 +22,24 @@ class ResultController extends BaseController
 
             $codeCheck = $this->container->submission->codeLint($filelocation);
 
+            
+            switch ($download[$i]['filetype']) {
+                case 'application/x-php':
+                    $phpunitTest = $this->container->submission->phpUnitTest($filelocation);
+                    break;
+                 case 'application/x-javascript':
+                    $phpunitTest = $this->container->submission->jsUnitTest($filelocation);
+                    break;
+                default:
+                    $phpunitTest = "No test Availble";
+                    break;
+            }
 
             $results = Download::find($fileid)->update(
                 array(
 
                 'lintresult' => $filelocation.'.json',
+                'unittestresult' => $phpunitTest, 
                 )
             );
 
@@ -36,7 +49,6 @@ class ResultController extends BaseController
         //Displays message confirming Sucess
             $this->container->flash->addMessage('info', 'Your files have been sucessfully checked, please download the files to see the results');
         
-            
         return $this->container->view->render(
             $response, 'Results/Results.html', array(
             'download' => $download,

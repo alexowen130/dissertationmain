@@ -29,31 +29,20 @@ class SubmissionDisplay
             return $output;  
     }
 
+    public function phpUnitTest($filename)
+    {
 
-    // //For User to attempt to log in
-    // public function attempt($username, $password)
-    // {
+        $output = shell_exec('../../vendor/bin/phpunit --coverage-text /var/www/unitTestPHP/AssertUnitTest.php');
 
-    //     $user = User::where('username', $username)->first();
+            $output1 = substr($output, 53, -56);  
+            return $output1;  
+    }
 
-    //     if (!$user) {
+    public function jsUnitTest($filename)
+    {
 
-    //         return false;
-    //     }
-
-    //     if (password_verify($password, $user->password)) {
-
-    //         $_SESSION['user'] = $user->id;
-    //         return true;
-    //     }
-
-    //     return false;
-
-    // }
-
-    // //Logs Out
-    // public function logout()
-    // {
-    //     unset($_SESSION['user']);
+        $output = shell_exec('../../vendor/bin/qunit /var/www/downloads/' . $filename);
+            return $output;
+    }    
 
 }
